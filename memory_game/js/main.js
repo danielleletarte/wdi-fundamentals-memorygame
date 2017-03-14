@@ -41,6 +41,7 @@ var flipCard = function() {
   console.log(cards[cardID].suit);
   console.log(cardID);
   cardsInPlay.push(cards[cardID].rank);
+  console.log(cardsInPlay.length);
   checkForMatch();
 };
 
@@ -49,9 +50,21 @@ var createBoard = function () {
     var cardElement = document.createElement('img');
     cardElement.setAttribute('src', 'images/back.png');
     cardElement.setAttribute('data-id', i);
+    cardElement.setAttribute('class', 'activeCards');
     document.getElementById('game-board').appendChild(cardElement);
     cardElement.addEventListener('click', flipCard);
   }
 };
+
+var gameReset = function () {
+  for (i=0; i < cards.length; i++){
+    var resetCard = document.getElementsByClassName('activeCards')[i];
+    resetCard.setAttribute('src', 'images/back.png');
+  }
+  cardsInPlay = [];
+  console.log(cardsInPlay.length);
+};
+
+document.getElementsByTagName('button')[0].addEventListener('click', gameReset);
 
 createBoard();
